@@ -1,27 +1,27 @@
 import java.util.*;
 import java.util.NoSuchElementException;
 
-public class MyArrayDeque {
+public class MyArrayDeque<T> {
 
-    private Integer[] array;
+    private Object[] array;
     private int size;
     private int capacity;
 
     public MyArrayDeque() {
-      array = new Integer[12];
+      array = new Object[12];
       capacity = 12;
     }
 
     public MyArrayDeque(int initialCapacity) {
-        array = new Integer[initialCapacity];
+        array = new Object[initialCapacity];
         capacity = initialCapacity;
     }
 
-    public void add(Integer o) {
+    public void add(T o) {
         addFirst(o);
     }
 
-    public void addFirst(Integer o) {
+    public void addFirst(T o) {
         if (isEmpty()) {
             array[0] = o;
             size ++;
@@ -39,7 +39,7 @@ public class MyArrayDeque {
         }
     }
 
-    public void addLast(Integer o) {
+    public void addLast(T o) {
         if (size < capacity) {
             array[size] = o;
             size ++;
@@ -51,7 +51,7 @@ public class MyArrayDeque {
         }
     }
 
-    public boolean offerFirst(Integer o) {
+    public boolean offerFirst(T o) {
         if (size < capacity) {
             addFirst(o);
             return true;
@@ -59,7 +59,7 @@ public class MyArrayDeque {
         return false;
     }
 
-    public boolean offerLast(Integer o) {
+    public boolean offerLast(T o) {
         if (size < capacity) {
             addLast(o);
             return true;
@@ -80,9 +80,9 @@ public class MyArrayDeque {
     }
 
     private void resize() {
-        Integer[] tmp;
+        Object[] tmp;
         capacity *= 2;
-        tmp = new Integer[capacity];
+        tmp = new Object[capacity];
 
         for (int i = 0; i < size; i ++) {
             tmp[i] = array[i];
@@ -94,7 +94,7 @@ public class MyArrayDeque {
         if(isEmpty()) {
             throw new NoSuchElementException();
         }
-        Integer tmp = array[0];
+        Object tmp = array[0];
         moveForward(0);
         size --;
         return tmp;
@@ -104,7 +104,7 @@ public class MyArrayDeque {
         if(isEmpty()) {
             throw new NoSuchElementException();
         }
-        Integer tmp = array[size - 1];
+        Object tmp = array[size - 1];
         size --;
         return tmp;
     }
@@ -113,7 +113,7 @@ public class MyArrayDeque {
         if (isEmpty()) {
             return null;
         }
-        Integer tmp = array[0];
+        Object tmp = array[0];
         moveForward(0);
         size --;
         return tmp;
@@ -123,7 +123,7 @@ public class MyArrayDeque {
         if (isEmpty()) {
             return null;
         }
-        Integer tmp = array[size - 1];
+        Object tmp = array[size - 1];
         size --;
         return tmp;
     }
@@ -156,7 +156,7 @@ public class MyArrayDeque {
         return array[size - 1];
     }
 
-    public boolean removeFirstOccurrence(Integer o) {
+    public boolean removeFirstOccurrence(T o) {
         for(int i = 0; i < size; i ++) {
             if (array[i].equals(o)) {
                 moveForward(i);
@@ -167,7 +167,7 @@ public class MyArrayDeque {
         return false;
     }
 
-    public boolean removeLastOccurrence(Integer o) {
+    public boolean removeLastOccurrence(T o) {
         for (int i = size - 1; i >= 0 ; i --) {
             if (array[i].equals(o)) {
                 moveForward(i);
@@ -178,7 +178,7 @@ public class MyArrayDeque {
         return false;
     }
 
-    public boolean offer(Integer o) {
+    public boolean offer(T o) {
         return offerFirst(o);
     }
 
@@ -214,7 +214,7 @@ public class MyArrayDeque {
         return false;
     }
 
-    public void push(Integer o) {
+    public void push(T o) {
         addFirst(o);
     }
 
@@ -226,7 +226,7 @@ public class MyArrayDeque {
         return false;
     }
 
-    public boolean contains(Object o) {
+    public boolean contains(T o) {
         return false;
     }
 
